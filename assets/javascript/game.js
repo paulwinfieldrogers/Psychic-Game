@@ -10,48 +10,61 @@
 //1. create an array of possible letters
 //2. declare variables to store wins, losses, remaining guesses and guesses so far
 //3. declare variables for recording the results on the page via getElementById
-//4. set the value of text 
+//4. set the value of text context for how many of each type is incremented
 
-
-console.log("Hello");
 
 //set an array of valid letter choices
+//I set this to just vowells for easier debugging
 var letterChoices = ["a", "e", "i", "o", "u"];
 
 //this function is run when user depresses a key
-//it initates the number of guesses allowed and then stops at 9 guesses
+//it initializes the number of guesses allowed and then stops at 9 guesses
+//I've not done the stopping at 9 guesses part due to problems with the core logic
 
-var numberOfUserWins =0;
-var numberOfUserLosses =0;
-var numberOfGuessesLeft =9;
+var numberOfUserWins = 0;
+var numberOfUserLosses = 0;
+var numberOfGuesses = 0;
 var numberOfGuessesSoFar = 0;
+var numberOfGuessesLeft = 9;
 
-  var uWins = document.getElementById("userWins");
-  var uLoose = document.getElementById("userLoses");
+//document.getElementById("userWins").innerHTML = numberOfUserWins;
+//document.getElementById("userLoses").innerHTML = numberOfUserLosses;
+
+
+//This is the function which triggers all the below action at key press
+
+document.onkeyup = function (event) {
+  //this captures the key pressed
+  var userGuess = event.key;
+  if (userGuess === "a" || userGuess === "e" || userGuess === "i" || userGuess === "o" || userGuess === "u")
+    //this 1st line ramdomly selects a letter from the array and cycles through the length
+    var computerGuess = letterChoices[Math.floor(Math.random() * letterChoices.length)];
+  //setting pointers to the DOM elements    
+  var gameResult = document.getElementById("result");
   var guessesLeft = document.getElementById("guessesLeft");
   var guessesSoFar = document.getElementById("guessesSoFar");
-  uWins.textContent = trackUserWins;
-  uLose.textContent = trackUserLosses;
-  guessesLeft.textContent = trackGuessesLeft;
-  guessesSoFar.textContent = trackGuessesSoFar;
+  var uLose = document.getElementById("userLoses");
+  var uWins = document.getElementById("userWins");
 
-  document.onkeyup = function (event) 
+  //start of if/else for win or loss - it is currently not working and is incrementing by 2 and also only intializing after the secon key press
+
+  if (userGuess === computerGuess) {
+    gameResult.textContent = "Win";
+    uWins.textContent = numberOfUserWins++;
+    guessesSoFar.textContent = numberOfGuessesSoFar++;
+    guessesLeft.textContent = numberOfGuessesSoFar - numberOfGuessesLeft;
+  }
+  else (userGuess != computerGuess)
+  gameResult.textContent = "Lose";
+  uLose.textContent = numberOfUserLosses++;
+  guessesSoFar.textContent = numberOfGuessesSoFar++;
+  guessesLeft.textContent = numberOfGuessesSoFar - numberOfGuessesLeft;
+
+  console.log(computerGuess);
+  console.log(userGuess);
+  console.log(numberOfUserLosses++);
+  console.log(numberOfUserWins++);
+  console.log(numberOfGuessesSoFar++);
+
+}
   
-  {
-    //here we are checking to see if this is a vowell
-var userGuess = event.key;
-if(userGuess === "a" ||userGuess === "e" || userGuess === "i"  || userGuess === "o" || userGuess === "u") {
-
-    //we randomly select a vowell
-
-    var computerGuess = letterChoices[Math.floor(Math.random() * letterChoices.length)];
-
-    var gameResult = document.getElementById("result");
-    
-    if (userGuess === computerGuess) {
-        gameResult.textContent = "Win";
-      trackUserWins++;
-    }
-    else if (userGuess != computerGuess) {
-    gameResult.textContent = "Lose";
-    }
