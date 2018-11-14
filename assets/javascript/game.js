@@ -27,18 +27,27 @@ var numberOfGuesses = 0;
 var numberOfGuessesSoFar = 0;
 var numberOfGuessesLeft = 9;
 
-//document.getElementById("userWins").innerHTML = numberOfUserWins;
-//document.getElementById("userLoses").innerHTML = numberOfUserLosses;
-
 
 //This is the function which triggers all the below action at key press
+
+function setInitalValues(){
+  numberOfUserWins = 1;
+  numberOfUserLosses = 1;
+}
+
+window.onload = function(){
+setInitalValues(numberOfUserWins, numberOfUserLosses);
+}
 
 document.onkeyup = function (event) {
   //this captures the key pressed
   var userGuess = event.key;
-  if (userGuess === "a" || userGuess === "e" || userGuess === "i" || userGuess === "o" || userGuess === "u")
-    //this 1st line ramdomly selects a letter from the array and cycles through the length
-    var computerGuess = letterChoices[Math.floor(Math.random() * letterChoices.length)];
+if (userGuess === "a" || userGuess === "e" || userGuess === "i" || userGuess === "o" || userGuess === "u"){
+  
+}else if (alert( "This is not vowell"));
+
+  //this 1st line ramdomly selects a letter from the array and cycles through the length
+  var computerGuess = letterChoices[Math.floor(Math.random() * letterChoices.length)];
   //setting pointers to the DOM elements    
   var gameResult = document.getElementById("result");
   var guessesLeft = document.getElementById("guessesLeft");
@@ -52,19 +61,25 @@ document.onkeyup = function (event) {
     gameResult.textContent = "Win";
     uWins.textContent = numberOfUserWins++;
     guessesSoFar.textContent = numberOfGuessesSoFar++;
-    guessesLeft.textContent = numberOfGuessesSoFar - numberOfGuessesLeft;
+    guessesLeft.textContent = numberOfGuessesLeft--;
   }
-  else (userGuess != computerGuess)
+  else if (userGuess != computerGuess){ // mistake was else instead of else if
   gameResult.textContent = "Lose";
   uLose.textContent = numberOfUserLosses++;
   guessesSoFar.textContent = numberOfGuessesSoFar++;
-  guessesLeft.textContent = numberOfGuessesSoFar - numberOfGuessesLeft;
-
-  console.log(computerGuess);
+  guessesLeft.textContent = numberOfGuessesLeft--;
   console.log(userGuess);
-  console.log(numberOfUserLosses++);
-  console.log(numberOfUserWins++);
-  console.log(numberOfGuessesSoFar++);
-
-}
+  console.log(numberOfUserLosses);
+  console.log(numberOfUserWins);
+  console.log(numberOfGuessesSoFar);
+  console.log(numberOfGuessesSoFar)
+  }
+  else if (guessesSoFar = 9){
+  gameResult = 0;
+  guessesLeft = 9;
+  guessesSoFar = 0;
+  uLose = 0;
+  uWins = 0;
   
+  }
+}
